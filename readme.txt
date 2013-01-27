@@ -3,8 +3,8 @@ Contributors: eliav@40nuggets.com
 Donate link: 
 Tags: mailing list, newsletter, 40nuggets, nuggets, enugget
 Requires at least: 3.3
-Tested up to: 3.5
-Stable tag: 1.0.1
+Tested up to: 3.5.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,12 +16,18 @@ Adds 40Nugets signup form to your sidebar or content without touching code.
 
 == Installation ==
 
+Please visit http://40nuggets.com and open an account.
+
 1. Upload all included files to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Place the widget in a side bar through 'Appearance -> Widgets'. 
 4. Enter your 40Nuggets client ID.
 
 == Frequently asked questions ==
+
+= Where do I get 40Nuggets client ID =
+
+Please visit http://40nuggets.com and open an account.
 
 = Does 40Nuggets replace my existing email newsletter program? =
 
@@ -54,9 +60,6 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 = Does email look like it comes from my own email address? =
 
 Yes, absolutely. Your brand, your heading, your logo. We show you exactly how to do it when you sign up.
-
-= Where do I get 40Nuggets client ID =
-Please visit http://40nuggets.com and open an account.
 
 == Screenshots ==
 1. http://40nuggets.com/widget/img/wp-screenshot1.png
