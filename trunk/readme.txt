@@ -4,7 +4,7 @@ Donate link:
 Tags: mailing list, newsletter, 40nuggets, nuggets, enugget
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
