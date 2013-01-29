@@ -4,7 +4,7 @@ Plugin Name: 40Nuggets Widget
 Plugin URI: http://40nuggets.com/plugins/wordpress/
 Description: Adds 40Nugets signup form to your sidebar or content without touching code.
 Author: 40Nuggets.com, Ltd.
-Version: 1.0.2
+Version: 1.0.3
 Author URI: http://40nuggets.com
 */
 
@@ -121,39 +121,7 @@ function simple_sidebar_widget_content_gen($args) {
 		var nm = document.createElement('script'); nm.type = 'text/javascript'; nm.async = true;
 		nm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + '40nuggets.com/widget/js/40nm.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(nm, s);
-	  })();
-	  
-	  function subscribe(){
-		var name = jQuery('#fortynm-contact-form-name').val();
-		var email = jQuery('#fortynm-contact-form-email').val();
-		
-		var url = 'http://40nuggets.com/api1/40nm/subscribe?name=' + name + '&email=' + email;
-		url += '&url=' + encodeURIComponent(document.URL);
-		url += '&client=' + _40nmcid;
-		
-		jQuery('.fortynm-contact-send').attr('disabled', true);
-
-		jQuery.ajax({
-			url: url,
-			dataType: 'jsonp',
-			jsonp: 'jsonp_callback',
-			cache: false,
-			success: function (data) {
-				console.log('success');
-				jQuery('.fortynm-contact-form').hide();
-				jQuery('.fortynm-contact-message')
-					.html(jQuery('<p align=\'center\'><br/></p>').append('Welcome aboard!'))
-					.fadeIn(200);
-			},
-			error: function () {
-				console.log('error');
-				jQuery('.fortynm-contact-form').hide();
-				jQuery('.fortynm-contact-message')
-					.html(jQuery('<p align=\'center\'><br/></p>').append('Oops, we\'ve got a problem'))
-					.fadeIn(200);
-			}
-		});		
-	  }
+	  })();	  
 	</script>
 	<!-- 40Nuggets Ends -->
    ";
@@ -168,7 +136,7 @@ function simple_sidebar_widget_content_gen($args) {
 			<div class='fortynm-contact-form'>
 				<input type='hidden' id='fortynm-contact-form-name' class='fortynm-contact-input' name='name' tabindex='1001' />
 				<input type='text' id='fortynm-contact-form-email' class='fortynm-contact-input' name='email' tabindex='1002' />
-				<button onclick='subscribe();' type='submit' class='fortynm-contact-send fortynm-contact-button' tabindex='1006'>Join</button>
+				<button onclick='fortynmSubscribe();' type='submit' class='fortynm-contact-send fortynm-contact-button' tabindex='1003'>Join</button>
 			</div>
 		<div class='fortynm-contact-bottom'><a href='http://40nuggets.com/dashboard/info.php' style='font-size:x-small' target='_blank'>Powered by 40Nuggets</a></div>
 		<p>&nbsp;</p>
