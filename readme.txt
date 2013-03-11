@@ -1,111 +1,72 @@
-=== 40Nuggets Smart Auto-Newsletter Creator ===
+=== 40Nuggets Widget ===
 Contributors: eliav@40nuggets.com
 Donate link: 
-Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widgit, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
+Tags: mailing list, newsletter, 40nuggets, nuggets, enugget
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The first WP auto-newsletter creator that utilizes user-adaptive technology. It’s automatic blog-to-newsletter creation that's smart, personalized to each subscriber and hassle free.
+Adds 40Nugets signup form to your sidebar or content without touching code.
 
 == Description ==
 
-The first WP auto-newsletter creator that utilizes user-adaptive technology. It’s automatic blog-to-newsletter creation that's smart, personalized to each subscriber and hassle free.
-
-Create and send personalized newsletters from the content you publish on your blog. But unlike other auto-newsletter plugins, 40Nuggets matches your content to the right subscribers seamlessly for a user- adaptive newsletter with no extra effort. 40Nuggets simply grabs the content you have already worked hard to create and sends it to your subscribers in the form of a clean, personalized email. Manage everything from within your WP Dashboard.
-
-What’s so different about this plugin? Behind this plugin sits an advanced algorithmic brain which constantly analyzes your audience, your posts, and creates a newsletter perfectly matched to each subscriber with the best and most relevant content from your blog.
-
-You don’t need to waste hours every week or month crafting a whole new email and scheduling delivery. Our system creates the newsletter automatically and can deliver it dynamically to your contacts at the time that’s right for them. 40Nuggets plugin tracks exactly when your newsletter is opened by each audience member and can adjust individual delivery times accordingly.
-
-The newsletter is comprised of old and new posts from your site; you can decide which posts are included and which are left out. With minimal settings, low maintenance, and complete transparency- you can track your stats and analyze engagement, all without any extra effort beyond publishing your posts as you normally would.
-
-40Nuggets plugin can track audience behavior on your site as well as analyze opens and clicks to make sure you have the complete picture and that subscriber behavior and preference is a key factor in deciding what is set out to them.
-
-It’s easy, it’s smart, and it’s streamlined. Install this plugin, let it run, and watch your audience engage with your content on and off your site, completely hassle free. You’ll never look at newsletters the same way again.
-
+Adds 40Nugets signup form to your sidebar or content without touching code.
 
 == Installation ==
 
-Take your pick goldilocks, there’s a fit for everyone...
+Please visit http://40nuggets.com and open an account.
 
-1. [Porridge without the frills]
+1. Upload all included files to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Place the widget in a side bar through 'Appearance -> Widgets'. 
+4. Enter your 40Nuggets client ID.
 
+== Frequently asked questions ==
 
-	1. In your Admin, go to menu Plugins > Add
-	2. Search for ‘40Nuggets’
-	3. Click to install
-	4. Activate the plugin
-	5. A new menu ‘40Nuggets’ will appear in your Admin
+= Where do I get 40Nuggets client ID =
 
-2. [The people’s porridge]
-
-
-	1. Download the plugin (.zip file) on the right column of this page
-	2. In your Admin, go to menu Plugins > Add
-	3. Select the tab "Upload"
-	4. Upload the .zip file you just downloaded
-	5. Activate the plugin
-	6. A new menu ‘40Nuggets Smart Auto-Newsletter Creator’ will appear in your Admin
-
-3. [Upscale porridge]
-
-
-	1. Upload ‘40Nuggets’ older to the /wp-content/plugins/ directory
-	2. Activate the plugin through the 'Plugins' menu in WordPress
-	3. A new menu ‘40Nuggets’ will appear in your Admin
-
-
-== Frequently Asked Questions ==
+Please visit http://40nuggets.com and open an account.
 
 = Does 40Nuggets replace my existing email newsletter program? =
 
-40Nuggets can replace your existing eNewsletter program but does not necessarily have to. 40Nuggets is mainly focused on delivering the right content to each unique subscriber, rather than simply communicating news. Our technology creates more relevant and personalized emails and allows for better engagement. That said, you may also use it for a news update or product offering as well. Whatever you publish on your blog is fair game. If you publish a post you do not want to appear in your Newsletter, simply ‘exclude’ from the list in your Newsletter tab.
+40Nuggets can replace your existing eNewsletter program. 40Nuggets is mainly focused on delivering the right nuggets of content to each unique user, rather than simply communicating news. That said, you may also use it for a news update as well. And if you choose you can keep your old Newsletter system for your occasional news updates, and let 40Nuggets work your content for you in the meantime.
 
-= So are all of my contacts receiving the same Newsletter? =
+= Can I control the timing of my nuggets? =
 
-No. They are not. That’s the beauty of our system. Each audience member is receiving a different Newsletter based on their behavior and preferences. The minute they open the first Newsletter, we begin tracking and analyzing behavior so each Newsletter delivered thereafter is even more personalized for them. All content within the Newsletters come from your published blog posts, however, the posts which appear in the Newsletter will be different for each email and every individual. And what’s more- you don’t have to re-edit or create a new template. That’s the ease of our system. It’s all automatic. 
+Absolutely. 40Nuggets is becoming evermore adaptive; soon it will analyze when each unique user prefers to have mail delivered and the program will adapt to deliver your nuggets then. This will be a nice advantage for you should you choose to take advantage of it. That said, you will always have control over the timing of your mailings.
 
-= Can I control the timing of my Newsletter? =
+= Can I edit nuggets? =
 
-Absolutely. You have full control over the delivery rate and you can determine how often your audience receives your Newsletters. That said, our Optimized delivery setting is highly recommended as the 40Nuggets plugin employs adaptive technology which means it can analyze when each individual audience member prefers to have mail delivered and the program constantly adapts to deliver your Newsletters according to the individual’s tracked preference. 
+Yes!
 
-= Can I edit the Newsletters? =
+= How much does 40Nuggets cost? =
 
-Yes. You can, but you probably won’t need to. The 40Nuggets plugin grabs published posts you have already worked hard to edit and create. If, however, you would like to re-edit something you can simply hit the ‘Edit Original’ button in the Newsletter tab and you will be able to edit your original post, save it, and our system will update with any changes you may have made.
+40Nuggets is free for up to 100 contacts and 500 Nuggets per month. Beyond that, plan prices range based on how many contacts you are sending to (see our "Get Started" page). The value in 40Nuggets is not only matching and sending the right content to the right users, but saving you lots of time creating content. To help you in this we analyze your content and help you pull out the right nuggets for use in your mailings.
 
 = Can I cancel? =
 
-Yes. Anytime and with no penalty fee. If you are on a payment plan, you pay a monthly fee, and you can say goodbye anytime (though we'll miss you!). You simply ‘Deactivate’ the plugin and remove the widget from whichever pages you chose to put it on your site.
+Anytime and with no penalty fee. You pay a monthly fee, and you can say goodbye anytime (though we'll miss you!).
 
 = What statistics can I see? =
 
-We provide you a full overview of how your content is performing with each and every audience member. You may track delivery numbers, bounce rate, unique open rates, total opens, unique clicks, total clicks. Much more on the way, too…
+We provide you a full overview of how your content is performing with each and every user. You will be able to track delivery numbers, bounce rate, unique open rates, total opens, unique clicks, total clicks. Much more on the way, too.
 
-= How does 40Nuggets match content to my subscribers? =
+= How does 40Nuggets match content and users? =
 
-We use a bunch of tools that we've created over time and by analyzing thousands of pieces of content and hundreds of thousands of communications with audience members. We can track and analyze your audience members’ behavior on your site, which pages and links they click and read, if you enable this option and we also track and analyze the open rates, open times, and tons of other stats for every individual. This information is all fed into the 40Nuggets brain which uses a complex algorithm to determine which content each of your subscribers is likely to prefer. 
+We use a bunch of tools that we've created over time and by analyzing thousands of pieces of content and hundreds of thousands of communications with audience members.
 
+= Does email look like it comes from my own email address? =
+
+Yes, absolutely. Your brand, your heading, your logo. We show you exactly how to do it when you sign up.
 
 == Screenshots ==
-1. http://40nuggets.com/widget/img/General_Screenshot.png
-2. http://40nuggets.com/widget/img/Newsletter_Screenshot.png
-3. http://40nuggets.com/widget/img/Audience_Screenshot.png
-4. http://40nuggets.com/widget/img/Sample_Newsletter_Screenshot.png
+1. http://40nuggets.com/widget/img/wp-screenshot1.png
+2. http://40nuggets.com/widget/img/wp-screenshot2.png
+
 
 == Changelog ==
 
-= 1.1 =
-* Auto Newsletter creation
-* Newsletter management
-* Audience managements
-* stats
-* Settings
-
-= 1.0.1 =
-* Fix bug causing the form not to respond on some templates.
-
-= 1.0 =
-* Release
+1.0.1 - Fix to bug causing the form not to respond on some templates.
+1.0 - Release
