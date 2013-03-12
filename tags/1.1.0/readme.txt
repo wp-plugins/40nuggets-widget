@@ -91,9 +91,9 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 
 == Screenshots ==
 
-1. General_Screenshot.
-2. Newsletter_Screenshot.
-3. Audience_Screenshot.
+1. General Screenshot.
+2. Newsletter Screenshot.
+3. Audience Screenshot.
 4. Sample Newsletter Screenshot.
 
 == Changelog ==
