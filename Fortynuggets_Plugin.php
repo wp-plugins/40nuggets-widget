@@ -456,7 +456,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 	
 	public function httpCall($url, $method=null, $data_string=null){
 
-		error_log ("Calling:$method $url With data $data_string");
+		//error_log ("Calling:$method $url With data $data_string");
 	
 		$cookie = dirname(__FILE__) . '/fortynuggets.fnm';
 
@@ -475,7 +475,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$result = curl_exec($ch);
 				
 		curl_close($ch);
-		error_log ("Result: $result");
+		//error_log ("Result: $result");
 		
 		return $result;
 	}
@@ -494,15 +494,12 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 	}	
 
 	public function exclude_post ($post_id){
-		error_log("Will exclude $post_id");
 		if ($this->is_excluded($post_id)) return;
 		
 		$options = $this->get_options();
 		$options->excludes = isset($options->excludes) ? (array)$options->excludes : array();
 		$options->excludes[$post_id] = $post_id;
 		$this->save_options($options);
-		error_log("Did exclude $post_id");
-		error_log("In exclude we have ".print_r($options->excludes,true));
 	}
 	
 	public function include_post ($post_id){
