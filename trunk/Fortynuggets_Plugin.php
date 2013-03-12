@@ -113,13 +113,11 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
         add_action('wp_head', array(&$this, 'import_nuggets'));
 
         // Adding scripts & styles to all pages
-        // Examples:
-        //     wp_enqueue_style('my-style', plugins_url('/css/my-style.css', __FILE__));
             if (!is_admin()) {
 				wp_enqueue_script('jquery');
                 
 				$options = $this->get_options();
-				if ($options->site_track){
+				if ($options->site_track || !isset($options->site_track)){
 					wp_enqueue_script('40nm-tracking', plugins_url('/js/track.js', __FILE__));
 				}
 				//pass key to js
@@ -127,6 +125,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 				wp_localize_script('40nm-tracking', '_40nmcid', $options->api_key);
 			}else{
 				//media upload
+				add_action('admin_init', array(&$this, 'fix_thickbox_action_button'));
 				wp_enqueue_script('media-upload');
 				wp_enqueue_script('thickbox');
 				wp_enqueue_script('my-upload', plugins_url('/js/upload_image.js', __FILE__), array('jquery','media-upload','thickbox'));
@@ -341,7 +340,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 						"link" => get_permalink($post->id),
 						"author" => get_the_author(),
 						"date" => get_the_date("d-m-Y"),
-						"body" => get_the_content(),
+						"body" => $this->get_the_content_with_formatting(),
 						"client" => $options->id,
 						"state" => 2,
 						"is_displayable_thumbnail" => $is_displayable_thumbnail,
@@ -376,7 +375,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 						"link" => get_permalink($post->id),
 						"author" => get_the_author(),
 						"date" => get_the_date("d-m-Y"),
-						"body" => get_the_content(),
+						"body" => $this->get_the_content_with_formatting(),
 						"client" => $options->id,
 						"is_displayable_thumbnail" => $is_displayable_thumbnail,
 						);
@@ -540,4 +539,42 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		echo $html;
 	}
 	
+	protected function get_the_content_with_formatting () {
+		$content = get_the_content();
+		$content = apply_filters('the_content', $content);
+		$content = str_replace(']]>', ']]&gt;', $content);
+		return $content;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public function fix_thickbox_action_button() {
+		global $pagenow;
+
+		if ( 'media-upload.php' == $pagenow || 'async-upload.php' == $pagenow ) {
+			// Now we'll replace the 'Insert into Post Button' inside Thickbox
+			add_filter( 'gettext', array(&$this, 'replace_thickbox_text'), 1, 3 );
+		}
+	}
+
+	public function replace_thickbox_text($translated_text, $text, $domain) {
+		if ('Insert into Post' == $text) {
+			$referer = strpos( wp_get_referer(), 'fnm-settings' );
+			if ( $referer != '' ) { 
+				switch ($_GET["type"]){
+					case 'image': return __('Use this as my banner!', 'fnm' );
+					case 'file': return __('Use this CSV file', 'fnm' );
+				}
+			}
+		}
+		return $translated_text;
+	}
+
 }

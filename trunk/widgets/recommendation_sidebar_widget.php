@@ -17,7 +17,7 @@ function recommendation_sidebar_widget_control_gen($widget_title, $num_of_recomm
 				 id='widget_title' 
 				 name='widget_title'
 				 type='text' 
-				 value='$widget_title.'/>
+				 value='$widget_title'/>
 		   </label>
 		</p>
 		<p>

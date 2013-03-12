@@ -188,6 +188,8 @@
 	}
 </style>
 
+<?php echo '<div style="position:absolute;top:0;right:0;"><a href="widgets.php"><img src="' . plugins_url( 'images/widget.png' , __FILE__ ) . '" ></a></div>';?>
+
 <div class="wrap">
 	<div id="icon-edit-pages" class="icon32"></div>
 	<h2>Newsletter
@@ -272,7 +274,7 @@
 			<?php 
 			if (count($nuggets) == 0){
 				switch ($nugget_status){
-					case 1: 	$message = "You have no pending posts or social content awaiting review"; break;
+					case 1: 	$message = "You have no posts or social content awaiting review"; break;
 					case 2: 	$message = "Either you have no published posts on your site or we are still processing your site. Hang tight..."; break;
 					case 999: 	$message = "You have not excluded any posts from your Newsletter content"; break;
 				}
