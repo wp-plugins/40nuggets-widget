@@ -4,7 +4,7 @@ Donate link:
 Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widgit, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,7 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 
 
 == Screenshots ==
+
 1. http://40nuggets.com/widget/img/General_Screenshot.png
 2. http://40nuggets.com/widget/img/Newsletter_Screenshot.png
 3. http://40nuggets.com/widget/img/Audience_Screenshot.png
@@ -97,7 +98,7 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 
 == Changelog ==
 
-= 1.1 =
+= 1.1.0 =
 * Auto Newsletter creation
 * Newsletter management
 * Audience managements

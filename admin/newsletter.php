@@ -21,7 +21,7 @@
 					if (isset($response->error)){
 						$failed_response = $response;
 						$failed_calls++;
-						error_log("Error when trashing: {$response->error}");
+						//error_log("Error when trashing: {$response->error}");
 					}else{
 						//exclude this nugget
 						$post_id = $plugin->get_post_id($nugget);
