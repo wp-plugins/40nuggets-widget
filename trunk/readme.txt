@@ -8,7 +8,7 @@ Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The first WP auto-newsletter creator that utilizes user-adaptive technology. It's automatic blog-to-newsletter creation that's smart, personalized to each subscriber and hassle free.
+A smart newsletter creator utilizing user-adaptive technology. It's automatic, personalized, and hassle free.
 
 == Description ==
 
@@ -91,7 +91,7 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 
 == Screenshots ==
 
-1. http://40nuggets.com/widget/img/General_Screenshot.png
+1. General_Screenshot.
 2. http://40nuggets.com/widget/img/Newsletter_Screenshot.png
 3. http://40nuggets.com/widget/img/Audience_Screenshot.png
 4. http://40nuggets.com/widget/img/Sample_Newsletter_Screenshot.png
