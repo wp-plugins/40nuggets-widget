@@ -35,10 +35,10 @@ Take your pick goldilocks, there's a fit for everyone...
 
 
 	1. In your Admin, go to menu Plugins > Add
-	2. Search for ‘40Nuggets'
+	2. Search for '40Nuggets'
 	3. Click to install
 	4. Activate the plugin
-	5. A new menu ‘40Nuggets' will appear in your Admin
+	5. A new menu '40Nuggets' will appear in your Admin
 
 2. [The people's porridge]
 
@@ -48,21 +48,21 @@ Take your pick goldilocks, there's a fit for everyone...
 	3. Select the tab "Upload"
 	4. Upload the .zip file you just downloaded
 	5. Activate the plugin
-	6. A new menu ‘40Nuggets Smart Auto-Newsletter Creator' will appear in your Admin
+	6. A new menu '40Nuggets Smart Auto-Newsletter Creator' will appear in your Admin
 
 3. [Upscale porridge]
 
 
-	1. Upload ‘40Nuggets' older to the /wp-content/plugins/ directory
+	1. Upload '40Nuggets' older to the /wp-content/plugins/ directory
 	2. Activate the plugin through the 'Plugins' menu in WordPress
-	3. A new menu ‘40Nuggets' will appear in your Admin
+	3. A new menu '40Nuggets' will appear in your Admin
 
 
 == Frequently Asked Questions ==
 
 = Does 40Nuggets replace my existing email newsletter program? =
 
-40Nuggets can replace your existing eNewsletter program but does not necessarily have to. 40Nuggets is mainly focused on delivering the right content to each unique subscriber, rather than simply communicating news. Our technology creates more relevant and personalized emails and allows for better engagement. That said, you may also use it for a news update or product offering as well. Whatever you publish on your blog is fair game. If you publish a post you do not want to appear in your Newsletter, simply ‘exclude' from the list in your Newsletter tab.
+40Nuggets can replace your existing eNewsletter program but does not necessarily have to. 40Nuggets is mainly focused on delivering the right content to each unique subscriber, rather than simply communicating news. Our technology creates more relevant and personalized emails and allows for better engagement. That said, you may also use it for a news update or product offering as well. Whatever you publish on your blog is fair game. If you publish a post you do not want to appear in your Newsletter, simply 'exclude' from the list in your Newsletter tab.
 
 = So are all of my contacts receiving the same Newsletter? =
 
@@ -74,11 +74,11 @@ Absolutely. You have full control over the delivery rate and you can determine h
 
 = Can I edit the Newsletters? =
 
-Yes. You can, but you probably won't need to. The 40Nuggets plugin grabs published posts you have already worked hard to edit and create. If, however, you would like to re-edit something you can simply hit the ‘Edit Original' button in the Newsletter tab and you will be able to edit your original post, save it, and our system will update with any changes you may have made.
+Yes. You can, but you probably won't need to. The 40Nuggets plugin grabs published posts you have already worked hard to edit and create. If, however, you would like to re-edit something you can simply hit the 'Edit Original' button in the Newsletter tab and you will be able to edit your original post, save it, and our system will update with any changes you may have made.
 
 = Can I cancel? =
 
-Yes. Anytime and with no penalty fee. If you are on a payment plan, you pay a monthly fee, and you can say goodbye anytime (though we'll miss you!). You simply ‘Deactivate' the plugin and remove the widget from whichever pages you chose to put it on your site.
+Yes. Anytime and with no penalty fee. If you are on a payment plan, you pay a monthly fee, and you can say goodbye anytime (though we'll miss you!). You simply 'Deactivate' the plugin and remove the widget from whichever pages you chose to put it on your site.
 
 = What statistics can I see? =
 
