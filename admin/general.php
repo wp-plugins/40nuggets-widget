@@ -40,7 +40,9 @@
 	.blog_ico {width:20px; height:20px;}
 	</style>
 
-    <div class="wrap">
+<?php echo '<div style="position:absolute;top:0;right:0;"><a href="widgets.php"><img src="' . plugins_url( 'images/widget.png' , __FILE__ ) . '" ></a></div>';?>
+
+<div class="wrap">
 	<form method="POST" action="">
     <table class="form-table">
       <tbody>
@@ -107,7 +109,7 @@
           </th>
           <td>
             <input name="title" type="text" id="title" value="<?php echo $me->client_title;?>" class="regular-text" />
-            <p class="description">This name will appear on the top of your newsletters as well as in the email subject line</p>
+            <p class="description">This name will appear on the top of your newsletters</p>
           </td>
         </tr>
 		<tr valign="top">

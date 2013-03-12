@@ -43,6 +43,8 @@
 
 </style>
 
+<?php echo '<div style="position:absolute;top:0;right:0;"><a href="widgets.php"><img src="' . plugins_url( 'images/widget.png' , __FILE__ ) . '" ></a></div>';?>
+
 <div class="wrap">
 	<div id="icon-users" class="icon32"></div>
 	<h2>Audience

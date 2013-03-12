@@ -3,13 +3,13 @@ jQuery(document).ready(function() {
 
 	jQuery('#upload_image_button').click(function() {
 		fnm_upload = true;
-		tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+		tb_show('Select Banner Image', 'media-upload.php?referer=fnm-settings&type=image&amp;TB_iframe=true');
 		return false;
 	});
 
 	jQuery('#upload_file_button').click(function() {
 		fnm_upload = true;
-		tb_show('', 'media-upload.php?type=file&amp;TB_iframe=true');
+		tb_show('Select CSV File', 'media-upload.php?referer=fnm-settings&type=file&amp;TB_iframe=true');
 		return false;
 	});
 	

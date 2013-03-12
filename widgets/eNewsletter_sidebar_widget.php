@@ -2,11 +2,49 @@
 
 add_action('init', 'eNewsletter_sidebar_widget_register');
 
+function eNewsletter_sidebar_widget_register() {
+	if (!function_exists('wp_register_sidebar_widget')) {
+		return;
+	}
+   
+	wp_register_widget_control(
+		'40nm-subscription-form',        	// your unique widget id
+		'40Nuggets eNewsletter',  // widget name
+		'eNewsletter_sidebar_widget_control',	// callback function
+		array(                  			// options
+			'description' => '40Nuggets eNewsletter subscription form'
+		)
+	);		
+	
+	wp_register_sidebar_widget(
+		'40nm-subscription-form',        	// your unique widget id
+		'40Nuggets eNewsletter',  // widget name
+		'eNewsletter_sidebar_widget_content_gen',// callback function
+		array(                  			// options
+			'description' => '40Nuggets eNewsletter subscription form'
+		)
+	);
+}
+
+function eNewsletter_sidebar_widget_control() {
+   $options = $newoptions = get_option('40nm_eNewsletter_sidebar_widget');
+
+   if ($_POST['eNewsletter-sidebar-widget-submit']) {
+         $newoptions['widget_title'] = strip_tags(stripslashes($_POST['widget_title']));
+         $newoptions['button_text'] = strip_tags(stripslashes($_POST['button_text']));
+   }
+
+   if ($options != $newoptions) {
+      $options = $newoptions;
+      update_option('40nm_eNewsletter_sidebar_widget', $options);
+   }
+
+   eNewsletter_sidebar_widget_control_gen($options['widget_title'], $options['button_text']);
+}
 
 function eNewsletter_sidebar_widget_control_gen($widget_title, $button_text) {
-
 	//set defaults
-	$widget_title = isset($widget_title) ? $widget_title : get_bloginfo()." Nuggets";
+	$widget_title = isset($widget_title) ? $widget_title : "Get our Newsletter";
 	$button_text = isset($button_text) ? $button_text : "Join";
 	
 	echo "
@@ -16,7 +54,7 @@ function eNewsletter_sidebar_widget_control_gen($widget_title, $button_text) {
 				 id='widget_title' 
 				 name='widget_title'
 				 type='text' 
-				 value='$widget_title.'/>
+				 value='$widget_title'/>
 		   </label>
 		</p>
 		<p>
@@ -35,27 +73,11 @@ function eNewsletter_sidebar_widget_control_gen($widget_title, $button_text) {
 	";
 }
 
-function eNewsletter_sidebar_widget_control() {
-   $options = $newoptions = get_option('eNewsletter_sidebar_widget');
-
-   if ($_POST['eNewsletter-sidebar-widget-submit']) {
-         $newoptions['widget_title'] = strip_tags(stripslashes($_POST['widget_title']));
-         $newoptions['button_text'] = strip_tags(stripslashes($_POST['button_text']));
-   }
-
-   if ($options != $newoptions) {
-      $options = $newoptions;
-      update_option('eNewsletter_sidebar_widget', $options);
-   }
-
-   eNewsletter_sidebar_widget_control_gen(
-      $options['widget_title'], $options['button_text']);
-}
 
 function eNewsletter_sidebar_widget_content_gen($args) {
    extract($args);
 
-   $options = get_option('eNewsletter_sidebar_widget');
+   $options = get_option('40nm_eNewsletter_sidebar_widget');
    
    $title = empty($options['widget_title']) ? 'Join our eNewsletter' : $options['widget_title'];
    $client_id = empty($options['client_id']) ? '40NM-xxxx-x' : $options['client_id'];
@@ -92,30 +114,6 @@ function eNewsletter_sidebar_widget_content_gen($args) {
    echo $after_widget;
 }
 
-function eNewsletter_sidebar_widget_register() {
-	if (!function_exists('wp_register_sidebar_widget')) {
-		return;
-	}
-
-   
-	wp_register_sidebar_widget(
-		'40nm-subscription-form',        	// your unique widget id
-		'40Nuggets eNewsletter',  // widget name
-		'eNewsletter_sidebar_widget_content_gen',// callback function
-		array(                  			// options
-			'description' => '40Nuggets eNewsletter subscription form'
-		)
-	);
-	
-	wp_register_widget_control(
-		'40nm-subscription-form',        	// your unique widget id
-		'40Nuggets eNewsletter',  // widget name
-		'eNewsletter_sidebar_widget_control',	// callback function
-		array(                  			// options
-			'description' => '40Nuggets eNewsletter subscription form'
-		)
-	);	  
-}
 
 
 ?>
