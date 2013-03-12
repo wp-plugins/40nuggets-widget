@@ -92,9 +92,9 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 == Screenshots ==
 
 1. General_Screenshot.
-2. http://40nuggets.com/widget/img/Newsletter_Screenshot.png
-3. http://40nuggets.com/widget/img/Audience_Screenshot.png
-4. http://40nuggets.com/widget/img/Sample_Newsletter_Screenshot.png
+2. Newsletter_Screenshot.
+3. Audience_Screenshot.
+4. Sample Newsletter Screenshot.
 
 == Changelog ==
 
