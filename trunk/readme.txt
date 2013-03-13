@@ -117,6 +117,10 @@ Once you upload your contacts, or anytime a new contact is added to your list, t
 
 == Changelog ==
 
+= 1.1.1 =
+* Minor bug fix
+
+
 = 1.1.0 =
 * Auto Newsletter creation
 * Newsletter management
