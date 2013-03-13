@@ -242,6 +242,9 @@
 				<?php } ?> 
 			</select>
 			<input type="submit" name="" id="doaction" class="button action" value="Apply">
+			<span class='description aligncenter'>
+				Heads up: this is a list of published posts from your site; these posts will comprise your Newsletter.
+			</span>
 		</div>
 	</div>
 	

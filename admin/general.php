@@ -74,6 +74,16 @@
 			<a href="http://40nuggets.com/dashboard/pricing.php#Standard" target="_blank">(?)</a>
           </td>
         </tr>
+        <tr valign="top">
+          <th scope="row">
+            <label>Support</label>
+          </th>
+          <td>
+            <p class="description">
+				Need help or guidance? check our <a href="http://40nuggets.com/wordpress/faq.html">Frequently Asked Questions</a>
+			</p>
+          </td>
+        </tr>
 <!--
 		<tr><th><h3>Connect Your Accounts</h3></th><tr>
         <tr valign="top">
@@ -119,7 +129,8 @@
 			<td>
 				<input id="upload_image" type="text" size="36" name="upload_image" value="<?php echo $me->image;?>" />
 				<input id="upload_image_button" type="button" value="Select Image" />
-				<p class="description">Enter a URL or upload the image you'd like to use from your computer</p>
+				<p class="description">Enter a URL or upload the image you'd like to use
+				<br/>**For super pretty results, we recommend using a PNG image file smaller than 600 X 350**</p>
 			</td>
 		</tr>        
         <tr valign="top">

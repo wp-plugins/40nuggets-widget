@@ -331,7 +331,6 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		setup_postdata($post);
 		$images = $this->get_post_images($post);
 		$image = $images[0];
-		$is_displayable_thumbnail = isset($image);
 		if (!isset($image)) $image = "";
 			
 		$nugget = array(
@@ -343,7 +342,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 						"body" => $this->get_the_content_with_formatting(),
 						"client" => $options->id,
 						"state" => 2,
-						"is_displayable_thumbnail" => $is_displayable_thumbnail,
+						"is_displayable_thumbnail" => true,
 						);
 		$json["nugget"] = $nugget;
 		$data_string = json_encode($json);  
@@ -366,7 +365,6 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		setup_postdata($post);
 		$images = $this->get_post_images($post);
 		$image = $images[0];
-		$is_displayable_thumbnail = isset($image);
 		if (!isset($image)) $image = "";
 
 		$nugget = array(
@@ -377,7 +375,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 						"date" => get_the_date("d-m-Y"),
 						"body" => $this->get_the_content_with_formatting(),
 						"client" => $options->id,
-						"is_displayable_thumbnail" => $is_displayable_thumbnail,
+						"is_displayable_thumbnail" => true,
 						);
 		$json["nugget"] = $nugget;
 		$data_string = json_encode($json); 
