@@ -1,7 +1,7 @@
 === 40Nuggets Smart Auto-Newsletter Creator ===
 Contributors: eliav@40nuggets.com
 Donate link: 
-Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widgit, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
+Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widget, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
 Requires at least: 3.3
 Tested up to: 3.5.1
 Stable tag: 1.1.0
@@ -91,9 +91,9 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 
 == Screenshots ==
 
-1. General_Screenshot.
-2. Newsletter_Screenshot.
-3. Audience_Screenshot.
+1. General Screenshot.
+2. Newsletter Screenshot.
+3. Audience Screenshot.
 4. Sample Newsletter Screenshot.
 
 == Changelog ==
