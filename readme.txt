@@ -4,7 +4,7 @@ Donate link:
 Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widget, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
