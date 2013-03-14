@@ -1,12 +1,12 @@
 <?php
+	$plugin = new Fortynuggets_Plugin ();	
+	$email = get_option('admin_email');
 
-	if( isset($_POST['settings-updated']) ) {
-		$email = $_POST["email"];
+	if( isset($_POST['redeem-account']) ) {
+		//login
 		$password = $_POST["password"];
 		
-		$plugin = new Fortynuggets_Plugin ();	
 		if ($plugin->login($email, $password)){
-			$url = home_url();
 			echo "
 			<script type='text/javascript'>
 				window.location = '?page=40Nuggets';
@@ -17,6 +17,13 @@
 				<p align='center'><strong>Login Failed</strong></p>
 				</div>";
 		}
+	}else if( isset($_GET['reset']) ) {
+		//reset password
+		$client["client"] = array("email" => $email);
+		$data_string = json_encode($client);  
+
+		$response = $plugin->apiCall("forgot_password", "POST", $data_string);
+		$plugin->show_response ($response, "We've sent an e-mail with further instructions to $email.");
 	}
 ?>
 
@@ -24,13 +31,13 @@
 	<form method="POST" action="">
     <table class="form-table">
       <tbody>
-		<tr><th><h3>Switch Account</h3></th><tr>
+		<tr><th><h3>Redeem your Account</h3></th><tr>
         <tr valign="top">
           <th scope="row">
-            <label for="email">Email Address</label>
+            Registered E-mail
           </th>
           <td>
-            <input name="email" type="text" id="email" value="" class="regular-text" />
+            <?php echo $email;?>
           </td>
         </tr>
         <tr valign="top">
@@ -39,14 +46,15 @@
           </th>
           <td>
             <input name="password" type="password" id="password" value="" class="regular-text code" />
+			<br/><a href="?page=<?php echo $_GET["page"];?>&reset=true">Forgot your password?</a>
           </td>
         </tr>
       </tbody>
     </table>
 	
 	<p class="submit">
-		<input type="hidden" name="settings-updated" />
-		<input class="button-primary" type="submit" name="login" value=" <?php _e( 'Login' ); ?> " />
+		<input type="hidden" name="redeem-account" />
+		<input class="button-primary" type="submit" name="login" value=" <?php _e( 'Redeem' ); ?> " />
 	</p>
 	</form>
 	</div>

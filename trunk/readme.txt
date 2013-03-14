@@ -4,7 +4,7 @@ Donate link:
 Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widget, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,12 @@ Once you upload your contacts, or anytime a new contact is added to your list, t
 4. Sample Newsletter Screenshot.
 
 == Changelog ==
+
+= 1.1.2 =
+* Account recovery
+* Improved newsletter creation
+* Stop newsletter delivery when plugin is deactivated 
+* Fixed recommendations for posts without images
 
 = 1.1.1 =
 * Minor bug fix

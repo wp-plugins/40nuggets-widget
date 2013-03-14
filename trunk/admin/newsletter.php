@@ -196,11 +196,13 @@
 	<?php if ($searchQuery) echo "<span class='subtitle'>Search results for '$searchQuery'</span>"; ?>
 	</h2>
 			<?php if ($import_progress < 100){
+			$import_progress = max($import_progress,2);
+			$message = ($import_progress > 7) ? $import_progress."%" : "";
 			echo "<div style='width:300px;margin:auto;text-align:center;'>
 					<span class='description'>Processing your site, please hang in there...</span>
 					<div style='height:20px;border-color:#e6db55;background-color:#ffffe0;-webkit-border-radius:3px;border-radius:3px;border-width:1px;border-style:solid;'>
 						<div style='width:$import_progress%;height:20px;line-height:20px;background-color:green;color:#ffffff;font-weight:bold;'>
-						$import_progress%
+						$message
 						</div>
 					</div>
 				  </div>";

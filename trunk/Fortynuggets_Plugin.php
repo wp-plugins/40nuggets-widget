@@ -168,7 +168,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		return false; 
 	}
 
-	protected function create_client(){
+	public function create_client(){
 		//create new user
 		$email = get_option('admin_email');
 		$password = substr(sha1(time() . "thisisagooddaytosavelives"), 0, 8);
@@ -185,9 +185,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		
 		$this->apiCall('clients', "POST", $data_string);
 		
-		//TODO: Check if client created successfully, what happens if he already signed up?
-		
-		$this->login($email, $password);
+		$response = $this->login($email, $password);
 						
 		return $response;
 	}
@@ -195,7 +193,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 	protected function freeze_client($state){
 		$options = $this->get_options();
 		$data["client"] = array(
-						"is_freeze" => $state,
+						"is_frozen" => $state,
 						);
 		$data_string = json_encode($data);	
 		$response = $this->apiCall("clients/{$options->id}", "PUT", $data_string);
@@ -445,11 +443,17 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$url = 'http://40nuggets.com/api1/40nm/'.$api;  
 		$result = $this->httpCall($url, $method, $data_string);
 		
-		if (isset($result->error)){
-			//TODO: check if not logged in and redirect to login page
+		$json = json_decode($result);
+		
+		if (isset($json->error)){
+			switch ($json->error->code){
+				case 403005: 
+					echo "<script type='text/JavaScript'>window.location='?page=40Nuggets-login';</script>";
+					break;
+			}
 		}
 		
-		return json_decode($result);
+		return $json;
 	}
 	
 	public function httpCall($url, $method=null, $data_string=null){
@@ -520,7 +524,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		
 		if (isset($response->error)){
 			$class = "error";
-			$code = isset($response->error->code) ? " (Error:{$response->error->code})" : "";
+			$code = isset($response->error->code) ? " ({$response->error->message})" : "";
 			$message = isset($error) ? $error : "Oops, Something went wrong...$code";
 		}else{
 			$class = "updated";
