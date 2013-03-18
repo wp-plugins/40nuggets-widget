@@ -2,7 +2,7 @@
 /*
    Plugin Name: 40Nuggets Smart Auto-Newsletter Creator
    Plugin URI: http://wordpress.org/extend/plugins/40nuggets-widget/
-   Version: 1.1.3
+   Version: 1.1.5
    Author: 40Nuggets
    Description: The first WP auto-newsletter creator that utilizes user-adaptive technology. It's automatic blog-to-newsletter creation that's smart, personalized to each subscriber and hassle free. 
    Text Domain: 40Nuggets

@@ -46,10 +46,10 @@ echo "			/>
 function recommendation_sidebar_widget_control() {
    $options = $newoptions = get_option('recommendation_sidebar_widget');
 
-   if ($_POST['recommendation-sidebar-widget-submit']) {
-         $newoptions['widget_title'] = strip_tags(stripslashes($_POST['widget_title']));
-         $newoptions['num_of_recommendations'] = strip_tags(stripslashes($_POST['num_of_recommendations']));
-         $newoptions['show_images'] = $_POST['show_images'];
+   if ($GLOBALS['MY_REQUEST']['recommendation-sidebar-widget-submit']) {
+         $newoptions['widget_title'] = strip_tags(stripslashes($GLOBALS['MY_REQUEST']['widget_title']));
+         $newoptions['num_of_recommendations'] = strip_tags(stripslashes($GLOBALS['MY_REQUEST']['num_of_recommendations']));
+         $newoptions['show_images'] = $GLOBALS['MY_REQUEST']['show_images'];
    }
 
    if ($options != $newoptions) {
