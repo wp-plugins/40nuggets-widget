@@ -1,13 +1,13 @@
 <?php 
 	$plugin = new Fortynuggets_Plugin ();	
 
-	if( isset($_POST['action']) ) {
+	if( isset($GLOBALS['MY_REQUEST']['action']) ) {
 	
-		switch ($_POST['action']){
+		switch ($GLOBALS['MY_REQUEST']['action']){
 			case "create_user":
 				$options = $plugin->get_options();
-				$email = urlencode($_POST["email"]);
-				$name = urlencode($_POST["name"]);
+				$email = urlencode($GLOBALS['MY_REQUEST']["email"]);
+				$name = urlencode($GLOBALS['MY_REQUEST']["name"]);
 				$api_key = $options->api_key;
 				$api = "subscribe?is_dashboard=true&name=$name&email=$email&client=$api_key";
 				$response = $plugin->apiCall($api);
@@ -15,7 +15,7 @@
 			case "upload_csv":
 				//TODO: needs API for uploading CSV
 				$data = array(
-								"url" => $_POST["upload_file"]
+								"url" => $GLOBALS['MY_REQUEST']["upload_file"]
 								);
 				$data_string = json_encode($data);   
 				$response = $plugin->apiCall("clients/me/csvs", "POST", $data_string);
@@ -26,7 +26,7 @@
 			$class = "error";
 			$code = isset($response->error->code) ? " (Error:{$response->error->code})" : "";
 			$message = "Oops, Something went wrong...$code";
-			if ($_POST['action'] == "upload_csv"){
+			if ($GLOBALS['MY_REQUEST']['action'] == "upload_csv"){
 				$message .= "<br class='clear'/>Having trouble with those pesky CSV's? Email us at <a href='mailto:support@40nuggets.com'>support@40nuggets.com</a> and we'll get you contacts loaded up for you.";
 			}else{
 				$message .= "<br class='clear'/>Think Think Think";
@@ -90,7 +90,12 @@ function isValidEmail(email){
 		<tr valign="top">
 			<td>
 				<input id="upload_file" type="text" size="36" name="upload_file" value="" />
-				<input id="upload_file_button" type="button" value="Select File" />
+				<input type="button" class="button" name="select_from_media_library" id="select_from_media_library" 
+					data-for="upload_file" 
+					data-title="Select CSV File" 
+					data-button-text="Use This File" 
+					value="Select File" />
+
 			</td>
 		</tr>
 	</tbody>

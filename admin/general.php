@@ -12,9 +12,9 @@
 
 		</div>';
 
-	if( isset($_POST['settings-updated']) ) {
-		$_POST["image"] = $_POST["upload_image"];
-		$json["client"] = $_POST;
+	if( isset($GLOBALS['MY_REQUEST']['settings-updated']) ) {
+		$GLOBALS['MY_REQUEST']["image"] = $GLOBALS['MY_REQUEST']["upload_image"];
+		$json["client"] = $GLOBALS['MY_REQUEST'];
 		$data_string = json_encode($json); 
 		$options = $plugin->get_options();
 
@@ -23,14 +23,14 @@
 		if (!isset($response->error)){
 			//save local settings
 			$options = $plugin->get_options();
-			$options->site_track = isset($_POST["site_track"]) ? $_POST["site_track"] : "";
-			$options->freshness = isset($_POST["freshness"]) ? $_POST["freshness"] : "";
+			$options->site_track = isset($GLOBALS['MY_REQUEST']["site_track"]) ? $GLOBALS['MY_REQUEST']["site_track"] : "";
+			$options->freshness = isset($GLOBALS['MY_REQUEST']["freshness"]) ? $GLOBALS['MY_REQUEST']["freshness"] : "";
 			$plugin->save_options($options);
 		}
 	}
 	$response = $plugin->apiCall("clients/me");
 	$me = $response->client;
-	
+
 	$options = $plugin->get_options();
 	$site_track = isset ($options->site_track) ? $options->site_track : "on";
 	$freshness = isset ($options->freshness) ? $options->freshness : "on";
@@ -40,6 +40,58 @@
 	.blog_ico {width:20px; height:20px;}
 	</style>
 
+<script language="javascript">
+jQuery(document).ready(function($){
+	
+	jQuery("#from_email").change(function() {
+		var email = jQuery("#from_email").val().toLowerCase();
+		if (!isValidEmail(email)){
+			message = "<span style='color:red;'>Invalid email</span>";
+			jQuery("#verify_email").html(message);
+		}
+	});
+	
+	jQuery("#from_email").keyup(function() {
+		var email = jQuery("#from_email").val().toLowerCase();
+		
+		var message = (email.indexOf("@40nuggets.com") > 0)? "" : "<a style='cursor: pointer;text-decoration:underline;' onclick='verify_sender_email();'>Verify this address</a>";
+		if (!isValidEmail(email)) message = "";
+		
+		jQuery("#verify_email").html(message);
+	});
+
+});
+
+function verify_sender_email(){
+	var email = jQuery("#from_email").val();
+	if (!isValidEmail(email)) return;
+		
+	//this is hacky! :)
+	jQuery("#verify_email").append("<span class='spinner' style='display:inline;'></span>");
+	jQuery("#verify_email").append("<iframe id='verify_frame' src='<?php echo plugins_url( 'verify_sender.php' , __FILE__ );?>?email=" + encodeURIComponent(email) + "' frameborder='0' height='0px' seamless></iframe>");
+	jQuery(".spinner").show();
+	timerId = setInterval(function () {
+		response = jQuery("#verify_frame").contents().find("body").html();
+			
+		if (response){
+			clearInterval(timerId);
+			jQuery("#verify_frame").remove();
+			jQuery(".spinner").hide();
+			
+			//show success message
+			message = "<span style='color:green;'>Check your inbox for Amazon SES verification</span>";
+			jQuery("#verify_email").html(message);
+
+		}
+	}, 1000);
+}
+
+function isValidEmail(email){
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+	return re.test(email);
+}
+</script>
+	
 <?php echo '<div style="position:absolute;top:0;right:0;"><a href="widgets.php"><img src="' . plugins_url( 'images/widget.png' , __FILE__ ) . '" ></a></div>';?>
 
 <div class="wrap">
@@ -128,7 +180,12 @@
 			</th>
 			<td>
 				<input id="upload_image" type="text" size="36" name="upload_image" value="<?php echo $me->image;?>" />
-				<input id="upload_image_button" type="button" value="Select Image" />
+				<input type="button" class="button" name="select_from_media_library" id="select_from_media_library" 
+					data-for="upload_image" 
+					data-library-type="image" 
+					data-title="Select Banner Image" 
+					data-button-text="Use As My Banner" 
+					value="Select Image" />
 				<p class="description">Enter a URL or upload the image you'd like to use
 				<br/>**For super pretty results, we recommend using a PNG image file smaller than 600 X 350**</p>
 			</td>
@@ -138,8 +195,9 @@
             <label for="from_email">Sender Email</label>
           </th>
           <td>
-            <input disabled name="from_email" type="text" id="from_email" value="<?php if ($me->is_use_email) $me->from_email; else echo "content@40nuggets.com";?>" class="regular-text ltr" />
-            <p class="description">This is the email address from which your contacts will receive your newsletter</p>
+			<input name="from_email" type="text" id="from_email" value="<?php echo ($me->is_use_email) ? $me->from_email : "content@40nuggets.com";?>" class="regular-text ltr" />
+            <span id="verify_email"><?php if ($me->is_use_email) echo ($me->is_aws_email_validated) ? "<span style='color:green;'>(Verified)</span>" : "<span style='color:red;'>(Pending verification)</span> <a style='cursor: pointer;text-decoration:underline;' onclick='verify_sender_email();'>Re-send verification</a>";?></a></span>
+			<p class="description">This is the email address from which your contacts will receive your newsletter</p>
           </td>
         </tr>
         <tr>
@@ -189,5 +247,3 @@
 	</p>
 	</form>
 	</div>
-  </body>
-</html>
