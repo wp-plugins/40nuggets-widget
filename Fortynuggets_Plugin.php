@@ -134,7 +134,6 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$GLOBALS['MY_REQUEST'] = $_REQUEST;
 
 		if (get_magic_quotes_gpc()) {
-			error_log ("stripslashes_deep");
 			$GLOBALS['MY_REQUEST'] = array_map( 'stripslashes', $GLOBALS['MY_REQUEST'] ); 
 		}
 
