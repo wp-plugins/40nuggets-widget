@@ -6,11 +6,11 @@
 	$plugin = new Fortynuggets_Plugin ();	
 
 	//response to bulk action
-	if (isset($GLOBALS['MY_REQUEST']["action"]) &&
-		$GLOBALS['MY_REQUEST']["action"] == "unsubscribe" &&
-		count($GLOBALS['MY_REQUEST']["users"]) > 0){
+	if (isset($_POST["action"]) &&
+		$_POST["action"] == "unsubscribe" &&
+		count($_POST["users"]) > 0){
 		
-		$json["emails"] = $GLOBALS['MY_REQUEST']["users"];
+		$json["emails"] = $_POST["users"];
 		$data_string = json_encode($json);  
 		$response = $plugin->apiCall('batch_unsubscribe', "POST", $data_string);
 		
@@ -20,7 +20,7 @@
 			$message = "Oops, Something went wrong...$code";
 		}else{
 			$class = "updated";
-			$message = count($GLOBALS['MY_REQUEST']["users"]) . " users were removed from mailing list";
+			$message = count($_POST["users"]) . " users were removed from mailing list";
 		}
 		
 		echo "<div id='message' class='$class'>

@@ -92,7 +92,6 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
         // Add options administration page
         // http://plugin.michael-simpson.com/?page_id=47
         add_action('admin_menu', array(&$this, 'addSettingsSubMenuPage'));
-        add_action('admin_menu', wp_enqueue_media);
 
         // Example adding a script & style just for the options administration page
         // http://plugin.michael-simpson.com/?page_id=47
@@ -114,10 +113,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
         add_action('wp_head', array(&$this, 'import_nuggets'));
 
         // Adding scripts & styles to all pages
-            if (is_admin()) {
-				//media upload
-				wp_enqueue_script('my-upload', plugins_url('/js/upload_image.js', __FILE__), array('jquery','media-upload','thickbox'));
-			}else{
+            if (!is_admin()) {
 				wp_enqueue_script('jquery');
                 
 				$options = $this->get_options();
@@ -127,15 +123,14 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 				//pass key to js
 				$options = $this->get_options();
 				wp_localize_script('40nm-tracking', '_40nmcid', $options->api_key);
+			}else{
+				//media upload
+				add_action('admin_init', array(&$this, 'fix_thickbox_action_button'));
+				wp_enqueue_script('media-upload');
+				wp_enqueue_script('thickbox');
+				wp_enqueue_script('my-upload', plugins_url('/js/upload_image.js', __FILE__), array('jquery','media-upload','thickbox'));
+				wp_enqueue_style('thickbox');
 			}
-
-		// Create $GLOBALS['MY_REQUEST']
-		// http://php.net/manual/en/function.get-magic-quotes-gpc.php
-		$GLOBALS['MY_REQUEST'] = $_REQUEST;
-
-		if (get_magic_quotes_gpc()) {
-			$GLOBALS['MY_REQUEST'] = array_map( 'stripslashes', $GLOBALS['MY_REQUEST'] ); 
-		}
 
         // Register short codes
         // http://plugin.michael-simpson.com/?page_id=39
@@ -188,7 +183,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$json["client"] = $data;
 		$data_string = json_encode($json);	
 		
-		$this->apiCall('clients?key=wp_plugin', "POST", $data_string);
+		$this->apiCall('clients', "POST", $data_string);
 		
 		$response = $this->login($email, $password);
 						
@@ -550,4 +545,35 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		return $content;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public function fix_thickbox_action_button() {
+		global $pagenow;
+
+		if ( 'media-upload.php' == $pagenow || 'async-upload.php' == $pagenow ) {
+			// Now we'll replace the 'Insert into Post Button' inside Thickbox
+			add_filter( 'gettext', array(&$this, 'replace_thickbox_text'), 1, 3 );
+		}
+	}
+
+	public function replace_thickbox_text($translated_text, $text, $domain) {
+		if ('Insert into Post' == $text) {
+			$referer = strpos( wp_get_referer(), 'fnm-settings' );
+			if ( $referer != '' ) { 
+				switch ($_GET["type"]){
+					case 'image': return __('Use this as my banner!', 'fnm' );
+					case 'file': return __('Use this CSV file', 'fnm' );
+				}
+			}
+		}
+		return $translated_text;
+	}
+
 }

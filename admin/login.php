@@ -2,9 +2,9 @@
 	$plugin = new Fortynuggets_Plugin ();	
 	$email = get_option('admin_email');
 
-	if( isset($GLOBALS['MY_REQUEST']['redeem-account']) ) {
+	if( isset($_POST['redeem-account']) ) {
 		//login
-		$password = $GLOBALS['MY_REQUEST']["password"];
+		$password = $_POST["password"];
 		
 		if ($plugin->login($email, $password)){
 			echo "

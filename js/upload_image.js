@@ -1,36 +1,32 @@
-jQuery(document).ready(function($){
-	var _custom_media = true,
-		_orig_send_attachment = wp.media.editor.send.attachment;
-	
-	jQuery('#select_from_media_library').click(function(e) {
-           
-		   var for_element = jQuery(this).attr("data-for");
+jQuery(document).ready(function() {
+	var fnm_upload = false;
 
-		   // Create the media frame.
-            frame = wp.media.frames.customBackground = wp.media({
-				// Set title
-				title: jQuery(this).attr("data-title"),
-                
-				// Set modal library
-				library: {
-                    type: jQuery(this).attr("data-library-type"),
-                },
-				
-				// Set buton text
-                button: {
-                    text: jQuery(this).attr("data-button-text"),
-                }
-            });
-
-            // When an image is selected, run a callback.
-            frame.on( 'select', function() {
-                // Grab the selected attachment.
-                var attachment = frame.state().get('selection').first();
-				jQuery("#"+for_element).val(attachment.attributes.url);
-			});
-
-            // Finally, open the modal.
-            frame.open();			
+	jQuery('#upload_image_button').click(function() {
+		fnm_upload = true;
+		tb_show('Select Banner Image', 'media-upload.php?referer=fnm-settings&type=image&amp;TB_iframe=true');
+		return false;
 	});
 
+	jQuery('#upload_file_button').click(function() {
+		fnm_upload = true;
+		tb_show('Select CSV File', 'media-upload.php?referer=fnm-settings&type=file&amp;TB_iframe=true');
+		return false;
+	});
+	
+	window.original_send_to_editor = window.send_to_editor;
+	window.send_to_editor = function(html) {
+		if (fnm_upload) {
+			imgurl = jQuery('img',html).attr('src');
+			jQuery('#upload_image').val(imgurl);
+
+			fileurl = jQuery(html).attr('href');
+			jQuery('#upload_file').val(fileurl);
+
+			tb_remove();
+			formfield = '';
+
+		}else{
+			window.original_send_to_editor(html);
+		}
+	}	
 });

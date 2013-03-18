@@ -29,9 +29,9 @@ function eNewsletter_sidebar_widget_register() {
 function eNewsletter_sidebar_widget_control() {
    $options = $newoptions = get_option('40nm_eNewsletter_sidebar_widget');
 
-   if ($GLOBALS['MY_REQUEST']['eNewsletter-sidebar-widget-submit']) {
-         $newoptions['widget_title'] = strip_tags(stripslashes($GLOBALS['MY_REQUEST']['widget_title']));
-         $newoptions['button_text'] = strip_tags(stripslashes($GLOBALS['MY_REQUEST']['button_text']));
+   if ($_POST['eNewsletter-sidebar-widget-submit']) {
+         $newoptions['widget_title'] = strip_tags(stripslashes($_POST['widget_title']));
+         $newoptions['button_text'] = strip_tags(stripslashes($_POST['button_text']));
    }
 
    if ($options != $newoptions) {

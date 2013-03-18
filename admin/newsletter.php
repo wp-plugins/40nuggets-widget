@@ -4,7 +4,7 @@
 	$p = isset($_GET["p"]) ? $_GET["p"] : 1;
 	$c = isset($_GET["c"]) ? $_GET["c"] : PAGE_SIZE;
 	$nugget_status = isset($_GET["nugget_status"]) ? $_GET["nugget_status"] : 2;
-	$searchQuery = isset($GLOBALS['MY_REQUEST']["searchQuery"]) ? $GLOBALS['MY_REQUEST']["searchQuery"] : "";
+	$searchQuery = isset($_POST["searchQuery"]) ? $_POST["searchQuery"] : "";
 	
 	$plugin = new Fortynuggets_Plugin ();	
 	
@@ -12,7 +12,7 @@
 	if (isset($_REQUEST["action"])){
 		switch ($_REQUEST["action"]){
 			case "bulk_trash":
-				$nuggets = $GLOBALS['MY_REQUEST']["nuggets"];
+				$nuggets = $_POST["nuggets"];
 				if (count($nuggets) == 0) break;
 				$failed_calls = 0;
 				foreach ($nuggets as $nugget){
@@ -38,7 +38,7 @@
 				break;
 			
 			case "bulk_pending":
-				$nuggets = $GLOBALS['MY_REQUEST']["nuggets"];
+				$nuggets = $_POST["nuggets"];
 				if (count($nuggets) == 0) break;
 				$failed_calls = 0;
 				foreach ($nuggets as $nugget){
@@ -59,7 +59,7 @@
 				break;
 			
 			case "bulk_include":
-				$posts = $GLOBALS['MY_REQUEST']["nuggets"];
+				$posts = $_POST["nuggets"];
 				if (count($posts) == 0) break;
 				$failed_calls = 0;
 				foreach ($posts as $post_id){
@@ -82,7 +82,7 @@
 				break;
 			
 			case "bulk_active":
-				$nuggets = $GLOBALS['MY_REQUEST']["nuggets"];
+				$nuggets = $_POST["nuggets"];
 				if (count($nuggets) == 0) break;
 				$failed_calls = 0;
 				foreach ($nuggets as $nugget){
