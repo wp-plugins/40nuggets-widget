@@ -57,7 +57,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
      * See: http://plugin.michael-simpson.com/?page_id=35
      * @return void
      */
-    public function upgrade() {
+    public function upgrade() {		
     }
 
     /**
@@ -65,6 +65,13 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
      * @return void
      */
     public function activate() {
+		//restore cookie
+		$options = $this->get_options();
+		if (isset($options->cookie)){
+			$cookie = dirname(__FILE__) . '/fortynuggets.fnm';
+			file_put_contents($cookie, $options->cookie);
+		}
+
 		$this->freeze_client(false);
 	}
 
@@ -74,6 +81,12 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
      */
     public function deactivate() {
 		$this->freeze_client(true);
+
+		//store cookie
+		$options = $this->get_options();
+		$cookie = dirname(__FILE__) . '/fortynuggets.fnm';
+		$options->cookie = file_get_contents($cookie);
+		$this->save_options($options);
     }
 
     /**
