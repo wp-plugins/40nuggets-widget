@@ -14,10 +14,11 @@
 
 	if( isset($GLOBALS['MY_REQUEST']['settings-updated']) ) {
 		$GLOBALS['MY_REQUEST']["image"] = $GLOBALS['MY_REQUEST']["upload_image"];
+		$GLOBALS['MY_REQUEST']["is_frozen"] = $GLOBALS['MY_REQUEST']["is_frozen"] == "on" ? false : true;
 		$json["client"] = $GLOBALS['MY_REQUEST'];
 		$data_string = json_encode($json); 
 		$options = $plugin->get_options();
-
+		
 		$response = $plugin->apiCall("clients/{$options->id}", "PUT", $data_string);
 		$plugin->show_response ($response);
 		if (!isset($response->error)){
@@ -165,6 +166,17 @@ function isValidEmail(email){
         </tr>
 -->
 		<tr><th><h3>eNewsletter</h3></th><tr>
+        <tr valign="top">
+          <th scope="row">
+            <label for="is_frozen">Enable eNewsletter Delivery</label>
+          </th>
+          <td>
+            <p class="description">
+            <input type="checkbox" name="is_frozen" id="is_frozen"<?php if (!$me->is_frozen) echo ' checked="checked"';?>>
+			Keep this on to enable email delivery to your audience.
+  			</p>
+        </td>
+        </tr>
         <tr valign="top">
           <th scope="row">
             <label for="title">Header</label>

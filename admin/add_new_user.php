@@ -100,8 +100,21 @@ function isValidEmail(email){
 		</tr>
 	</tbody>
 </table>
-
-<p class="submit"><input type="submit" name="upload_csv" id="createusersub" class="button button-primary" value="Upload" onclick="if (document.getElementById('upload_file').value == '') return false;"></p>
+<br class="clear"/>
+<p class="description"><input type="checkbox" name="confirm_no_spam" id="confirm_no_spam"> I confirm that I have permission to send emails to those addresses on this list and any added hereafter.</p>
+<p class="submit"><input type="submit" name="upload_csv" id="createusersub" class="button button-primary" value="Upload" onclick="return validateCSV();"></p>
+<script type='text/JavaScript'>
+	function validateCSV(){
+		if (document.getElementById('upload_file').value == ''){ 
+			alert ("Please select a CSV file");
+			return false;
+		}
+		if (!document.getElementById('confirm_no_spam').checked){
+			alert ("Please confirm permission");
+			return false;
+		}
+	}
+</script>
 </form>
 
 </div>

@@ -147,7 +147,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$GLOBALS['MY_REQUEST'] = $_REQUEST;
 
 		if (get_magic_quotes_gpc()) {
-			$GLOBALS['MY_REQUEST'] = array_map( 'stripslashes', $GLOBALS['MY_REQUEST'] ); 
+			$GLOBALS['MY_REQUEST'] = $this->stripslashes_deep($GLOBALS['MY_REQUEST']);
 		}
 
         // Register short codes
@@ -158,7 +158,16 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
         // http://plugin.michael-simpson.com/?page_id=41
 
     }
+	
+	protected function stripslashes_deep($value){
+		error_log ("Stripping slashes");
+		$value = is_array($value) ?
+					array_map(array($this, 'stripslashes_deep'), $value) :   
+					stripslashes($value);
 
+		return $value;
+	}
+	
 	protected function otherInstall() {
 	    //create new account and other stuff
 		$this->create_client();
@@ -479,7 +488,8 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		//error_log ("Calling:$method $url With data $data_string");
 	
 		$cookie = dirname(__FILE__) . '/fortynuggets.fnm';
-
+		$savedVersion = $this->getVersionSaved();
+		
 		$ch = curl_init();  
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
@@ -487,7 +497,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17');
+		curl_setopt($ch, CURLOPT_USERAGENT,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17 WordPressPlugin/{$savedVersion}");
 		
 		if (isset($method)) 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);                                                                     
 		if (isset($data_string)) 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  

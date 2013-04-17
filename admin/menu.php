@@ -72,17 +72,17 @@ function FortyNuggets_create_submenu_page() {
 		'40Nuggets-login',			// The unique ID - the slug - for this menu item
 		'FortyNuggets_submenu_login_page_display' 	// The function used to render the menu for this page to the screen
 	);
-
-	//Import
+/*
+	//Analytics
 	add_submenu_page(
-		'',					// Register this submenu with the menu defined above
-		'Import',						// The text to the display in the browser when this menu item is active
-		'Import',						// The text for this menu item
+		'40Nuggets',					// Register this submenu with the menu defined above
+		'Analytics',						// The text to the display in the browser when this menu item is active
+		'Analytics',						// The text for this menu item
 		'administrator',			// Which type of users can see this menu
-		'40Nuggets-import',			// The unique ID - the slug - for this menu item
-		'FortyNuggets_submenu_import_page_display' 	// The function used to render the menu for this page to the screen
+		'40Nuggets-analytics',			// The unique ID - the slug - for this menu item
+		'FortyNuggets_submenu_analytics_page_display' 	// The function used to render the menu for this page to the screen
 	);
-
+*/
 	//Add User
 	add_submenu_page(
 		'',					// Register this submenu with the menu defined above
@@ -121,8 +121,8 @@ function FortyNuggets_submenu_login_page_display() {
 	require_once(dirname(__FILE__) . '/login.php');	
 }
 
-function FortyNuggets_submenu_import_page_display() {
-	require_once(dirname(__FILE__) . '/import.php');	
+function FortyNuggets_submenu_analytics_page_display() {
+	require_once(dirname(__FILE__) . '/analytics.php');	
 }
 
 function FortyNuggets_submenu_add_new_user_page_display() {
