@@ -4,7 +4,7 @@ Donate link:
 Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widget, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,9 @@ Once you upload your contacts, or anytime a new contact is added to your list, t
 
 == Changelog ==
 
+
+= 1.1.7 =
+* Fixed issue where Featured Image can't be set on some accounts.
 
 = 1.1.6 =
 * Enable/Disable eNewsletter delivery. Allowing you to pause/resume the newsletter for maintenance.

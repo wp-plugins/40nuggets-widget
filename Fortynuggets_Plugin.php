@@ -105,7 +105,9 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
         // Add options administration page
         // http://plugin.michael-simpson.com/?page_id=47
         add_action('admin_menu', array(&$this, 'addSettingsSubMenuPage'));
-        add_action('admin_menu', wp_enqueue_media);
+        if (strpos(strtolower($_GET["page"]),"40nuggets") !== false) { //add action only to 40Nuggets pages
+			add_action('admin_menu', wp_enqueue_media);
+		}
 
         // Example adding a script & style just for the options administration page
         // http://plugin.michael-simpson.com/?page_id=47
