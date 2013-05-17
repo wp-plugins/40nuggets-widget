@@ -4,7 +4,7 @@ Donate link:
 Tags: auto newsletter, automatic newsletter, email marketing, newsletter, newsletters, newsletter widget, newsletter plugin, subscribers, subscription, personalized content, customized content, email newsletter, email, post to email, email post, auto-subscribe, email capture, wp email capture
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1.7
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,9 @@ The newsletter is comprised of old and new posts from your site; you can decide 
 40Nuggets plugin can track audience behavior on your site as well as analyze opens and clicks to make sure you have the complete picture and that subscriber behavior and preference is a key factor in deciding what is set out to them.
 
 It's easy, it's smart, and it's streamlined. Install this plugin, let it run, and watch your audience engage with your content on and off your site, completely hassle free. You'll never look at newsletters the same way again.
+__
 
+Note to Users: What's innovative about 40Nuggets is its automation and brain. By using 40Nuggets you also acknowledge the following: 40Nuggets automates email from your existing WP content. As such emails are sent at the time that the system chooses, and in a standard design template. By using 40Nuggets you acknowledge that this is the case and that from the moment you add contacts to your "Audience," emails will begin to be sent based on your blogs content.  You can turn emails off via the "General" tab, and manage what content goes out in the "Newsletter" tab. You acknowledge that this is your responsibility, and 40Nuggets has no obligations in this regard. you also acknowledge that it is up to you to make sure the content in your "Newsletter" tab is appropriate for email distribution according to the 40Nuggets [terms of use](https://40nuggets.com/dashboard/policy.php).
 
 == Installation ==
 
@@ -59,6 +61,7 @@ Take your pick goldilocks, there's a fit for everyone...
 	2. Activate the plugin through the 'Plugins' menu in WordPress
 	3. A new menu '40Nuggets' will appear in your Admin
 
+Note to Users: What's innovative about 40Nuggets is its automation and brain. By using 40Nuggets you also acknowledge the following: 40Nuggets automates email from your existing WP content. As such emails are sent at the time that the system chooses, and in a standard design template. By using 40Nuggets you acknowledge that this is the case and that from the moment you add contacts to your "Audience," emails will begin to be sent based on your blogs content.  You can turn emails off via the "General" tab, and manage what content goes out in the "Newsletter" tab. You acknowledge that this is your responsibility, and 40Nuggets has no obligations in this regard. you also acknowledge that it is up to you to make sure the content in your "Newsletter" tab is appropriate for email distribution according to the 40Nuggets [terms of use](https://40nuggets.com/dashboard/policy.php).
 
 == Frequently Asked Questions ==
 
@@ -106,6 +109,7 @@ We use a bunch of tools that we've created over time and by analyzing thousands 
 
 Once you upload your contacts, or anytime a new contact is added to your list, they will not begin receiving your Newsletter immediately. Our system slowly begins sending your contacts Newsletters between 24 hours and 7 days after you add them to your list depending on what you delivery settings are. This allows our Brain to better track and adjust to individual behavior and preference. You can always reference your newsletter and contact analytics to view stats and for Custom accounts, we regularly send detailed reports and insights.
 
+Note to Users: What's innovative about 40Nuggets is its automation and brain. By using 40Nuggets you also acknowledge the following: 40Nuggets automates email from your existing WP content. As such emails are sent at the time that the system chooses, and in a standard design template. By using 40Nuggets you acknowledge that this is the case and that from the moment you add contacts to your "Audience," emails will begin to be sent based on your blogs content.  You can turn emails off via the "General" tab, and manage what content goes out in the "Newsletter" tab. You acknowledge that this is your responsibility, and 40Nuggets has no obligations in this regard. you also acknowledge that it is up to you to make sure the content in your "Newsletter" tab is appropriate for email distribution according to the 40Nuggets [terms of use](https://40nuggets.com/dashboard/policy.php).
 
 == Screenshots ==
 [youtube https://www.youtube.com/watch?v=BC0eehj3mIQ]
@@ -117,9 +121,6 @@ Once you upload your contacts, or anytime a new contact is added to your list, t
 
 == Changelog ==
 
-
-= 1.1.7 =
-* Fixed issue where Featured Image can't be set on some accounts.
 
 = 1.1.6 =
 * Enable/Disable eNewsletter delivery. Allowing you to pause/resume the newsletter for maintenance.
