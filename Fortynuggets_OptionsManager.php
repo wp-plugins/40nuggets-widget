@@ -19,9 +19,6 @@
     If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once(dirname(__FILE__) . '/widgets/eNewsletter_sidebar_widget.php');
-//require_once(dirname(__FILE__) . '/widgets/recommendation_sidebar_widget.php');
-
 class Fortynuggets_OptionsManager {
 
     public function getOptionNamePrefix() {

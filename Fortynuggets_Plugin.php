@@ -119,19 +119,11 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 
         // Add Actions & Filters
         // http://plugin.michael-simpson.com/?page_id=37
-		add_action('publish_post', array(&$this, 'run_when_post_published'), 10, 2);
-		add_action('trashed_post', array(&$this, 'run_when_post_trashed'));
-		add_action('publish_to_pending', array(&$this, 'run_when_post_unpublish'));
-		add_action('publish_to_draft', array(&$this, 'run_when_post_unpublish'));
-		add_action('publish_to_future', array(&$this, 'run_when_post_unpublish'));
+		//add_action('publish_post', array(&$this, 'run_when_post_published'), 10, 2);
 		
-		// Run import nuggets script
-        add_action('wp_head', array(&$this, 'import_nuggets'));
-
         // Adding scripts & styles to all pages
             if (is_admin()) {
-				//media upload
-				wp_enqueue_script('my-upload', plugins_url('/js/upload_image.js', __FILE__), array('jquery','media-upload','thickbox'));
+				//Add script on WP Admin Panel
 			}else{
 				wp_enqueue_script('jquery');
                 
@@ -162,42 +154,59 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
     }
 	
 	protected function stripslashes_deep($value){
-		error_log ("Stripping slashes");
 		$value = is_array($value) ?
-					array_map(array($this, 'stripslashes_deep'), $value) :   
-					stripslashes($value);
+		array_map(array($this, 'stripslashes_deep'), $value) :   
+		stripslashes($value);
 
 		return $value;
 	}
 	
 	protected function otherInstall() {
 	    //create new account and other stuff
-		$this->create_client();
 	}
 
 	public function login($email, $password){
 		
 		$data = array(
-						"email" => $email,
-						"password" => $password,
-						);
+					"email" => $email,
+					"password" => $password,
+					);
 		$json["client"] = $data;
 		$data_string = json_encode($json);   
 		
 		$response = $this->apiCall("login", "POST", $data_string);
-		
-		if (isset($response->client)){
-			$data["id"] = $response->client->id;
-			$data["api_key"] = $response->client->api_key;
-			$this->save_options($data);
+		if (isset($response->profile)){
+			$response = $this->apiCall("clients/me");
+			if (isset($response->client)){
+				$data["id"] = $response->client->id;
+				$data["api_key"] = $response->client->api_key;
+				$this->save_options($data);
 
-			return true;
+				return true;
+			}
 		}
 		
 		return false; 
 	}
 
+	public function logout(){
+		//delete cookie
+		$cookie = dirname(__FILE__) . '/fortynuggets.fnm';
+		file_put_contents($cookie, "");
+
+		//cleanup data
+		$data["id"] = "";
+		$data["api_key"] = "";
+		$this->save_options($data);
+		
+		return true;
+	}
+
 	public function create_client(){
+		//check if already logged in
+		$options = $this->get_options ();
+		if ($options->id) return true;
+		
 		//create new user
 		$email = get_option('admin_email');
 		$password = substr(sha1(time() . "thisisagooddaytosavelives"), 0, 8);
@@ -212,8 +221,7 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$json["client"] = $data;
 		$data_string = json_encode($json);	
 		
-		$this->apiCall('clients?key=wp_plugin', "POST", $data_string);
-		
+		$response = $this->apiCall('public/clients', "POST", $data_string);
 		$response = $this->login($email, $password);
 						
 		return $response;
@@ -230,246 +238,9 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		return $response;
 	}
 
-	public function get_recommendations($user, $url, $count){
-		//TBD: send user cookie!
-		$url = urlencode($url);
-		$response = $this->apiCall("clients/me/users/me/recommendations?url=$url&count=$count");
-		$nuggets = $response->nuggets;
-		
-		return $nuggets;
-	}
-
-	//return import progress in percentage
-	public function import_nuggets(){
-
-		if (!$this->did_collect_all_Nuggets()){
-			$options = $this->get_options();
-
-			$count_posts = wp_count_posts();
-			$published_posts = $count_posts->publish;		
-			$collected_nuggets = isset ($options->nuggetizer_offset) ? $options->nuggetizer_offset : 0;
-			$progress  = round($collected_nuggets/$published_posts*100);
-
-			$this->collect_Nuggets();
-		}else{
-			$progress = 100;
-		}
-		
-		return $progress;
-	}
-	
-	public function did_collect_all_Nuggets(){
-		$options = $this->get_options();
-		return isset($options->collect_all_Nuggets);
-	}
-	
-	protected function collect_Nuggets(){
-		$options = $this->get_options();
-		$offset = $options->nuggetizer_offset;
-		$count = 1;
-		
-		global $post;
-		$args = array(     
-					'post_status'  	=> 'publish',
-					'numberposts' 	=> $count,
-					'offset' 		=> $offset
-					);
-		$myposts = get_posts($args);
-		foreach($myposts as $post){
-			$this->add_post_as_nugget($post);
-		}
-		
-		if (count($myposts) == 0){
-			$options->collect_all_Nuggets = "YES";
-		}else{
-			unset($options->collect_all_Nuggets);
-		}
-		
-		
-		$options->nuggetizer_offset += $count;
-		$this->save_options($options);
-
-	}
-	
-	protected function get_post_images($post){
-		$images = array();
-		
-		//TODO: support "Featured Thumbnail"
-		
-		$doc = new DOMDocument();
-		@$doc->loadHTML($post->post_content);
-			
-		$tags = $doc->getElementsByTagName('img');
-
-		foreach ($tags as $tag) {
-			array_push ($images,$tag->getAttribute('src'));
-		}
-
-		return $images;
-	}
-
-	public function get_blog_logo(){
-		$images = array();
-				
-		$doc = new DOMDocument();
-		@$doc->loadHTML(get_header());
-			
-		$tags = $doc->getElementsByTagName('img');
-
-		foreach ($tags as $tag) {
-			array_push ($images,$tag->getAttribute('src'));
-		}
-		
-		return $images[0];
-	}
-	
-
-	public function get_nugget_id($post){
-		$url = urlencode(get_permalink($post));
-		$response = $this->apiCall("clients/me/nuggets?url=$url");
-		$nuggets = $response->nuggets;
-		$nugget = $nuggets[0]->nugget;
-		
-		return $nugget->id;
-	}
-	
-	public function get_post_id($nugget_id){
-		$response = $this->apiCall("nuggets/$nugget_id");
-		$nugget = $response->nugget;
-
-		return url_to_postid($nugget->link);
-	}
-	
-	public function run_when_post_published ($post_id, $post){
-		if ($this->is_excluded($post->id)) return;
-
-		// Abort if is post updated and not published at first time.
-		if ($post->post_date == $post->post_modified){ 	//new post
-			$this->add_post_as_nugget($post);
-		}else{											//update post
-			$this->update_post_as_nugget($post);
-		}		
-	}
-
-	protected function add_post_as_nugget($post){
-		if ($this->is_excluded($post->id)) return;
-
-		$options = $this->get_options();
-		setup_postdata($post);
-		$images = $this->get_post_images($post);
-		$image = $images[0];
-		if (!isset($image)) $image = "";
-			
-		$nugget = array(
-						"title" => $post->post_title,
-						"image" => $image,
-						"link" => get_permalink($post->id),
-						"author" => get_the_author(),
-						"date" => get_the_date("d-m-Y"),
-						"body" => $this->get_the_content_with_formatting(),
-						"client" => $options->id,
-						"state" => 2,
-						"is_displayable_thumbnail" => true,
-						);
-		$json["nugget"] = $nugget;
-		$data_string = json_encode($json);  
-		$this->apiCall('nuggets?is_short_body=true', "POST", $data_string);
-		//TODO: check if new nugget created successfully
-		wp_reset_postdata(); 
-	}
-
-	protected function update_post_as_nugget($post){
-		if ($this->is_excluded($post->id)) return;
-
-		//check if nugget exists
-		$nugget_id = $this->get_nugget_id($post);
-		if (!isset($nugget_id)){
-			$this->add_post_as_nugget($post);
-			return;
-		}
-	
-		$options = $this->get_options();
-		setup_postdata($post);
-		$images = $this->get_post_images($post);
-		$image = $images[0];
-		if (!isset($image)) $image = "";
-
-		$nugget = array(
-						"title" => $post->post_title,
-						"image" => $image,
-						"link" => get_permalink($post->id),
-						"author" => get_the_author(),
-						"date" => get_the_date("d-m-Y"),
-						"body" => $this->get_the_content_with_formatting(),
-						"client" => $options->id,
-						"is_displayable_thumbnail" => true,
-						);
-		$json["nugget"] = $nugget;
-		$data_string = json_encode($json); 
-		$this->apiCall("nuggets/$nugget_id?is_short_body=true", "PUT", $data_string);
-		wp_reset_postdata(); 
-	}
-		
-	public function run_when_post_unpublish ($post){
-		if ($this->is_excluded($post->id)) return;
-		
-		$nugget_id = $this->get_nugget_id($post);		
-		$this->unpublish_nugget ($nugget_id);
-	}
-
-	public function run_when_post_trashed ($post){
-		if ($this->is_excluded($post->id)) return;
-
-		setup_postdata($post);
-
-		$nugget_id = $this->get_nugget_id($post);				
-		$this->trash_nugget($nugget_id);
-
-		wp_reset_postdata(); 
-	}
-	
-	public function unpublish_nugget ($nugget_id){
-		$nugget = array(
-						"state" => 1,
-						);
-		$json["nugget"] = $nugget;
-		$data_string = json_encode($json);  
-		
-		$this->apiCall("nuggets/$nugget_id", "PUT", $data_string);
-	}
-	
-	public function publish_nugget ($nugget_id){
-		$nugget = array(
-						"state" => 2,
-						);
-		$json["nugget"] = $nugget;
-		$data_string = json_encode($json);  
-		
-		$this->apiCall("nuggets/$nugget_id", "PUT", $data_string);
-	}
-	
-	public function trash_nugget ($nugget_id){
-		$nugget = array(
-						"state" => 3,
-						);
-		$json["nugget"] = $nugget;
-		$data_string = json_encode($json);  
-		
-		$this->apiCall("nuggets/$nugget_id", "PUT", $data_string);
-	}
-	
-	//requests should be array of requests as defined in api
-	public function batchApiCall($requests){
-		$requests["requests"] = $requests;
-		$data_string = json_encode($requests);  
-
-		return $this->apiCall("batch", "POST", $data_string);
-		
-	}
-	
 	public function apiCall($api, $method="GET", $data_string=""){
 
-		$url = 'http://40nuggets.com/api1/40nm/'.$api;  
+		$url = 'http://localhost/api/'.$api;  
 		$result = $this->httpCall($url, $method, $data_string);
 		
 		$json = json_decode($result);
@@ -507,7 +278,6 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		$result = curl_exec($ch);
 				
 		curl_close($ch);
-		//error_log ("Result: $result");
 		
 		return $result;
 	}
@@ -516,39 +286,9 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		update_option('40nm-options', base64_encode(json_encode($options)));
 	}
 	
-	public function get_excluded_posts (){
-		$options = $this->get_options();
-		return isset($options->excludes) ? (array)$options->excludes : array();
-	}	
-
 	public function get_options (){
 		return json_decode(base64_decode(get_option('40nm-options')));
 	}	
-
-	public function exclude_post ($post_id){
-		if ($this->is_excluded($post_id)) return;
-		
-		$options = $this->get_options();
-		$options->excludes = isset($options->excludes) ? (array)$options->excludes : array();
-		$options->excludes[$post_id] = $post_id;
-		$this->save_options($options);
-	}
-	
-	public function include_post ($post_id){
-
-		if (!$this->is_excluded($post_id)) return;
-		
-		$options = $this->get_options();
-		$options->excludes = isset($options->excludes) ? (array)$options->excludes : array();
-		$options->excludes = array_diff($options->excludes, array($post_id));
-		$this->save_options($options);
-	}	
-
-	public function is_excluded ($post_id){
-		$options = $this->get_options();
-		$options->excludes = isset($options->excludes) ? (array)$options->excludes : array();
-		return in_array($post_id, $options->excludes);
-	}
 
 	public function show_response ($response, $success=null, $error=null){
 		
@@ -568,11 +308,4 @@ class Fortynuggets_Plugin extends Fortynuggets_LifeCycle {
 		echo $html;
 	}
 	
-	protected function get_the_content_with_formatting () {
-		$content = get_the_content();
-		$content = apply_filters('the_content', $content);
-		$content = str_replace(']]>', ']]&gt;', $content);
-		return $content;
-
-	}
 }
